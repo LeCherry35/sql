@@ -1,21 +1,28 @@
 const express = require('express')
 const userRouter = require('./routes/user.routes')
+const postRouter = require('./routes/post.routes')
+const cors = require('cors')
 
 const PORT = process.env.port || 8080
 const host = 'localhost'
 
 const app = express()
 
-// app.get('./', (req, res) => {
-//     res.send('<h1>GGG</h1>')
-// })
 
 app.use(express.json())
+app.use(cors())
 app.use('/api', userRouter)
+app.use('/api', postRouter)
+
+
+
+app.get('/',  (req, res) => {
+    res.send('GET request to the homepage');
+});
+
 
 
 app.listen(PORT, () => console.log('server is running on port ' + PORT))
-
 
 // const requestListener = function (req, res) {
 //     res.writeHead(200);
